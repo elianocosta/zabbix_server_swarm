@@ -1,0 +1,4 @@
+/srv/zabbix_server/docker-compose-master.yml:        - traefik.frontend.redirect.entryPoint=https
+Binary file /srv/zabbix-docker/.git/objects/pack/pack-25200837fd9282f7711121848f749b6a34d1d5b0.pack matches
+Binary file /srv/zabbix-docker/.git/objects/pack/pack-553d3fa9e1d9adc7b205a08d7ed2b27da38f2853.pack matches
+Binary file /srv/zabbix-docker/.git/index matches
