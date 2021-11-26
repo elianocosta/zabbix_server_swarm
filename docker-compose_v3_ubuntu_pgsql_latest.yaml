@@ -246,10 +246,7 @@ services:
    com.zabbix.os: "ubuntu"
 
  zabbix-snmptraps:
-  image: zabbix/zabbix-snmptraps:ubuntu-5.4-latest
-  profiles:
-   - full
-   - all
+  image: zabbix/zabbix-snmptraps:ubuntu-5.4-latest 
   ports:
    - "162:1162/udp"
   volumes:
