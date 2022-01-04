@@ -62,7 +62,7 @@ check_variables() {
     file_env POSTGRES_USER
     file_env POSTGRES_PASSWORD
 
-    : ${DB_SERVER_HOST:="postgres-server"}
+    : ${DB_SERVER_HOST:="postgres-zabbix"}
     : ${DB_SERVER_PORT:="5432"}
     : ${CREATE_ZBX_DB_USER:="false"}
 

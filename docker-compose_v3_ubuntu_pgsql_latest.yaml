@@ -325,13 +325,6 @@ services:
      - pgsql-server
      - pgsql-database
 
- db_data_mysql:
-  image: busybox
-  profiles:
-   - all
-  volumes:
-   - ./zbx_env/var/lib/mysql:/var/lib/mysql:rw
-
  db_data_pgsql:
   image: busybox
   volumes:
@@ -374,12 +367,6 @@ volumes:
   grafanastorage:
 
 secrets:
-  MYSQL_USER:
-    file: ./env_vars/.MYSQL_USER
-  MYSQL_PASSWORD:
-    file: ./env_vars/.MYSQL_PASSWORD
-  MYSQL_ROOT_PASSWORD:
-    file: ./env_vars/.MYSQL_ROOT_PASSWORD
   POSTGRES_USER:
     file: ./env_vars/.POSTGRES_USER
   POSTGRES_PASSWORD:

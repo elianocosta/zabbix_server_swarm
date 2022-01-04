@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 ARG MAJOR_VERSION=5.4
 ARG ZBX_VERSION=${MAJOR_VERSION}.7
-ARG BUILD_BASE_IMAGE=zabbix-build-base:ubuntu-${ZBX_VERSION}
+ARG BUILD_BASE_IMAGE=build-base:latest
 
 FROM ${BUILD_BASE_IMAGE} as builder
 
@@ -9,7 +9,7 @@ ARG MAJOR_VERSION
 ARG ZBX_VERSION
 ARG ZBX_SOURCES=https://git.zabbix.com/scm/zbx/zabbix.git
 
-LABEL org.opencontainers.image.authors="Alexey Pustovalov <alexey.pustovalov@zabbix.com>" \
+LABEL org.opencontainers.image.authors="Eliano costa <eliano.costa@seduc.ce.gov.br>" \
       org.opencontainers.image.description="Zabbix build base for MySQL based images" \
       org.opencontainers.image.documentation="https://www.zabbix.com/documentation/${MAJOR_VERSION}/manual/installation/containers" \
       org.opencontainers.image.licenses="GPL v2.0" \

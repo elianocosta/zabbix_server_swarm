@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 ARG MAJOR_VERSION=5.4
 ARG ZBX_VERSION=${MAJOR_VERSION}.7
-ARG BUILD_BASE_IMAGE=zabbix-build-mysql:ubuntu-${ZBX_VERSION}
+ARG BUILD_BASE_IMAGE=zabbix-build-pgsql:ubuntus-1.0
 
 FROM ${BUILD_BASE_IMAGE} as builder
 
@@ -9,20 +9,9 @@ FROM ubuntu:focal
 
 ARG MAJOR_VERSION
 ARG ZBX_VERSION
-ARG ZBX_SOURCES=https://git.zabbix.com/scm/zbx/zabbix.git
 
 ENV TERM=xterm \
-    ZBX_VERSION=${ZBX_VERSION} ZBX_SOURCES=${ZBX_SOURCES}
-
-LABEL org.opencontainers.image.authors="Alexey Pustovalov <alexey.pustovalov@zabbix.com>" \
-      org.opencontainers.image.description="Zabbix web-interface based on Nginx web server with PostgreSQL database support" \
-      org.opencontainers.image.documentation="https://www.zabbix.com/documentation/${MAJOR_VERSION}/manual/installation/containers" \
-      org.opencontainers.image.licenses="GPL v2.0" \
-      org.opencontainers.image.source="${ZBX_SOURCES}" \
-      org.opencontainers.image.title="Zabbix web-interface (Nginx, PostgreSQL)" \
-      org.opencontainers.image.url="https://zabbix.com/" \
-      org.opencontainers.image.vendor="Zabbix LLC" \
-      org.opencontainers.image.version="${ZBX_VERSION}"
+    ZBX_VERSION=${ZBX_VERSION} 
 
 STOPSIGNAL SIGTERM
 

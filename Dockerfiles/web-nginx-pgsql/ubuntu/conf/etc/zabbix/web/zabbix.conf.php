@@ -2,19 +2,19 @@
 // Zabbix GUI configuration file.
 global $DB, $HISTORY;
 
-$DB['TYPE']     = getenv('DB_SERVER_TYPE');
-$DB['SERVER']   = getenv('DB_SERVER_HOST');
-$DB['PORT']     = getenv('DB_SERVER_PORT');
-$DB['DATABASE'] = getenv('DB_SERVER_DBNAME');
-$DB['USER']     = (! getenv('VAULT_TOKEN') || ! getenv('ZBX_VAULTURL')) ? getenv('DB_SERVER_USER') : '';
-$DB['PASSWORD'] = (! getenv('VAULT_TOKEN') || ! getenv('ZBX_VAULTURL')) ? getenv('DB_SERVER_PASS') : '';
+$DB['TYPE']     = 'POSTGRESQL';
+$DB['SERVER']   = 'postgres_zabbix';
+$DB['PORT']     = '0';
+$DB['DATABASE'] = 'zabbix';
+$DB['USER']     = 'zabbix';
+$DB['PASSWORD'] = '0571cb42b6e2ff75ee56a121ff8710a3';
 
 // Schema name. Used for PostgreSQL.
 $DB['SCHEMA'] = getenv('DB_SERVER_SCHEMA');
 
-$ZBX_SERVER      = getenv('ZBX_SERVER_HOST');
+$ZBX_SERVER      = 'zabbix_server';
 $ZBX_SERVER_PORT = getenv('ZBX_SERVER_PORT');
-$ZBX_SERVER_NAME = getenv('ZBX_SERVER_NAME');
+$ZBX_SERVER_NAME = 'zabbix_server';
 
 // Used for TLS connection.
 $DB['ENCRYPTION']		= getenv('ZBX_DB_ENCRYPTION') == 'true' ? true: false;

@@ -142,14 +142,14 @@ check_variables_postgresql() {
     file_env POSTGRES_USER
     file_env POSTGRES_PASSWORD
 
-    : ${DB_SERVER_HOST:="postgres-server"}
+    : ${DB_SERVER_HOST:="postgres_zabbix"}
     : ${DB_SERVER_PORT:="5432"}
 
     DB_SERVER_ROOT_USER=${POSTGRES_USER:-"postgres"}
-    DB_SERVER_ROOT_PASS=${POSTGRES_PASSWORD:-""}
+    DB_SERVER_ROOT_PASS=${POSTGRES_PASSWORD:-"postgres"}
 
     DB_SERVER_ZBX_USER=${POSTGRES_USER:-"zabbix"}
-    DB_SERVER_ZBX_PASS=${POSTGRES_PASSWORD:-"zabbix"}
+    DB_SERVER_ZBX_PASS=${POSTGRES_PASSWORD:-"0571cb42b6e2ff75ee56a121ff8710a3"}
 
     : ${DB_SERVER_SCHEMA:="public"}
 
@@ -342,12 +342,12 @@ update_zbx_config() {
     update_config_var $ZBX_CONFIG "ListenBacklog" "${ZBX_LISTENBACKLOG}"
 
     update_config_var $ZBX_CONFIG "SourceIP" "${ZBX_SOURCEIP}"
-    update_config_var $ZBX_CONFIG "LogType" "console"
-    update_config_var $ZBX_CONFIG "LogFile"
+    update_config_var $ZBX_CONFIG "LogType" "file"
+    update_config_var $ZBX_CONFIG "LogFile" "/tmp/zabbix_server.log"
     update_config_var $ZBX_CONFIG "LogFileSize"
     update_config_var $ZBX_CONFIG "PidFile"
 
-    update_config_var $ZBX_CONFIG "DebugLevel" "${ZBX_DEBUGLEVEL}"
+    update_config_var $ZBX_CONFIG "DebugLevel" "4"
 
     if [ -n "${ZBX_DBTLSCONNECT}" ]; then
         update_config_var $ZBX_CONFIG "DBTLSConnect" "${ZBX_DBTLSCONNECT}"

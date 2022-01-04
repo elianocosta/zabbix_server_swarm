@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 ARG MAJOR_VERSION=5.4
 ARG ZBX_VERSION=${MAJOR_VERSION}.7
-ARG BUILD_BASE_IMAGE=zabbix-build-pgsql:ubuntu-${ZBX_VERSION}
+ARG BUILD_BASE_IMAGE=zabbix-build-pgsql:ubuntus-1.0
 
 FROM ${BUILD_BASE_IMAGE} as builder
 
@@ -15,7 +15,7 @@ ENV TERM=xterm \
     ZBX_VERSION=${ZBX_VERSION} ZBX_SOURCES=${ZBX_SOURCES} \
     MIBDIRS=/var/lib/snmp/mibs/ietf:/var/lib/snmp/mibs/iana:/usr/share/snmp/mibs:/var/lib/zabbix/mibs MIBS=+ALL
 
-LABEL org.opencontainers.image.authors="Alexey Pustovalov <alexey.pustovalov@zabbix.com>" \
+LABEL org.opencontainers.image.authors="eliano costa eliano.costa@seduc.ce.gov.br>" \
       org.opencontainers.image.description="Zabbix server with PostgreSQL database support" \
       org.opencontainers.image.documentation="https://www.zabbix.com/documentation/${MAJOR_VERSION}/manual/installation/containers" \
       org.opencontainers.image.licenses="GPL v2.0" \
@@ -31,6 +31,7 @@ COPY --from=builder ["/tmp/zabbix-${ZBX_VERSION}/src/zabbix_server/zabbix_server
 COPY --from=builder ["/tmp/zabbix-${ZBX_VERSION}/src/zabbix_get/zabbix_get", "/usr/bin/zabbix_get"]
 COPY --from=builder ["/tmp/zabbix-${ZBX_VERSION}/src/zabbix_sender/zabbix_sender", "/usr/bin/zabbix_sender"]
 COPY --from=builder ["/tmp/zabbix-${ZBX_VERSION}/conf/zabbix_server.conf", "/etc/zabbix/zabbix_server.conf"]
+RUN sed -e 's/LogType=console/#LogType=console/g' /etc/zabbix/zabbix_server.conf  > /tmp/teste.conf && mv /tmp/teste.conf /etc/zabbix/zabbix_server.conf
 COPY --from=builder ["/tmp/zabbix-${ZBX_VERSION}/database/postgresql/create_server.sql.gz", "/usr/share/doc/zabbix-server-postgresql/create.sql.gz"]
 COPY --from=builder ["/tmp/zabbix-${ZBX_VERSION}/database/postgresql/timescaledb.sql", "/usr/share/doc/zabbix-server-postgresql/timescaledb.sql"]
 
