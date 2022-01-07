@@ -8,6 +8,14 @@ FROM ${BUILD_BASE_IMAGE} as builder
 ARG MAJOR_VERSION
 ARG ZBX_VERSION
 ARG ZBX_SOURCES=https://git.zabbix.com/scm/zbx/zabbix.git
+LABEL org.opencontainers.image.authors="Eliano Costa <eliano.costa@seduc.ce.gov.br>" \
+      org.opencontainers.image.description="Zabbix build base image contains all required packages to build Zabbix images" \
+      org.opencontainers.image.documentation="https://www.zabbix.com/documentation/${MAJOR_VERSION}/manual/installation/containers" \
+      org.opencontainers.image.licenses="GPL v2.0" \
+      org.opencontainers.image.title="Zabbix build base" \
+      org.opencontainers.image.url="https://zabbix.com/" \
+      org.opencontainers.image.vendor="Zabbix LLC" \
+      org.opencontainers.image.version="${ZBX_VERSION}"
 
 RUN set -eux && \
     ARCH_SUFFIX="$(arch)"; \

@@ -16,8 +16,7 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-    networks:
-      - internal
+    networks:     
       - net_app
     ports:
       - "5432:5432"
@@ -37,8 +36,7 @@ services:
       - ./zbx_env/var/lib/zabbix/snmptraps:/var/lib/zabbix/snmptraps:ro
     env_file:      
       - ./env_vars/.env_srv
-    networks:
-      - internal
+    networks:     
       - net_app
   zabbix-web-nginx:
     image: zabbix-web-nginx-pgsql:ubuntus-1.0
@@ -60,10 +58,21 @@ services:
       - POSTGRES_PASSWORD
     depends_on:
       - postgres_zabbix
-    networks:
-      - internal
+    networks:      
       - net_app
-
+  zabbix-agent:
+    image: zabbix-agent:ubuntus-1.0
+    ports:
+      - "10050:10050"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./zbx_env/etc/zabbix/zabbix_agentd.conf:/etc/zabbix/zabbix_agentd.conf:ro
+      - ./zbx_env/etc/zabbix/zabbix_agentd.d:/etc/zabbix/zabbix_agentd.d:ro
+      - ./zbx_env/var/lib/zabbix/modules:/var/lib/zabbix/modules:ro
+      - ./zbx_env/var/lib/zabbix/enc:/var/lib/zabbix/enc:ro
+      - ./zbx_env/var/lib/zabbix/ssh_keys:/var/lib/zabbix/ssh_keys:ro
+    env_file:
+      - ./env_vars/.env_agent   
 networks:
   internal:
   net_app:
