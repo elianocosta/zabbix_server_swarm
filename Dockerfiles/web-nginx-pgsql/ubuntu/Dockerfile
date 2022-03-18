@@ -5,7 +5,7 @@ ARG BUILD_BASE_IMAGE=zabbix-build-pgsql:ubuntus-1.0
 
 FROM ${BUILD_BASE_IMAGE} as builder
 
-FROM ubuntu:focal
+FROM ubuntu:20.04
 
 ARG MAJOR_VERSION
 ARG ZBX_VERSION
