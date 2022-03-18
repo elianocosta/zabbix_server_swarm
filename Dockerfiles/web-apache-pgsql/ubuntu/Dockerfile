@@ -5,7 +5,7 @@ ARG BUILD_BASE_IMAGE=zabbix-build-mysql:ubuntu-${ZBX_VERSION}
 
 FROM ${BUILD_BASE_IMAGE} as builder
 
-FROM ubuntu:focal
+FROM ubuntu:20.04
 LABEL org.opencontainers.image.authors="Eliano Costa <eliano.costa@seduc.ce.gov.br>" \
       org.opencontainers.image.description="Zabbix build base image contains all required packages to build Zabbix images" \
       org.opencontainers.image.documentation="https://www.zabbix.com/documentation/${MAJOR_VERSION}/manual/installation/containers" \
