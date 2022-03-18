@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM ubuntu:focal
+FROM ubuntu:20.04
 
 ARG MAJOR_VERSION=5.4
 ARG ZBX_VERSION=${MAJOR_VERSION}.7
